@@ -32,3 +32,6 @@ BASE16_SHELL="$HOME/src/base16-shell/"
 
 # Bind Ctrl-R to recursively search history.
 bindkey "^R" history-incremental-search-backward
+
+# Useful aliases.
+alias gitwdiff='git diff --word-diff'
