@@ -35,7 +35,10 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
-  'prompt'
+  'prompt' \
+  'ocaml' \
+  'fasd' \
+  'git'
 
 #
 # Autosuggestions
