@@ -12,3 +12,11 @@ fi
 
 # Add ~/bin to $PATH.
 path=(~/bin $path)
+
+# Set env.
+export EDITOR='vim'
+export VISUAL=$EDITOR
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+# Source direnv.
+eval "$(direnv hook zsh)"
