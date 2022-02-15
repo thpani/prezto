@@ -62,3 +62,6 @@ function gitignore() {
 		curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
 	fi
 }
+
+# added by travis gem
+[ -f /Users/thomas/.travis/travis.sh ] && source /Users/thomas/.travis/travis.sh
