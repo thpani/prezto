@@ -35,3 +35,12 @@ bindkey "^R" history-incremental-search-backward
 
 # Useful aliases.
 alias gitwdiff='git diff --word-diff'
+
+function gitignore() {
+	if [ -z "$1" ]; then
+		echo "Usage: gitignore <language>"
+		echo "  Languages: https://github.com/github/gitignore"
+	else
+		curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
+	fi
+}
