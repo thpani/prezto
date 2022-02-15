@@ -37,6 +37,23 @@ bindkey "^R" history-incremental-search-backward
 alias gitwdiff='git diff --word-diff'
 # alias ss='sshuttle -r sg1 0/0'
 
+# Graphviz
+# dot2pdf() {
+#   pdf_path=$(basename "$1" .dot).pdf
+#   dot -Tpdf "$1" >"$pdf_path" && echo "$pdf_path"
+# }
+# dotopen() {
+#   for f ; do
+#     d=$(dot2pdf "$f")
+#     open -a skim "$d"
+#   done
+# }
+# dotprint() {
+#   for f ; do
+#     printn $(dot2pdf "$f") 1
+#   done
+# }
+
 function gitignore() {
 	if [ -z "$1" ]; then
 		echo "Usage: gitignore <language>"
