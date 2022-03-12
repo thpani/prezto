@@ -38,6 +38,7 @@ bindkey "^R" history-incremental-search-backward
 
 # Useful aliases.
 alias gitwdiff='git diff --word-diff'
+alias git-delete-merged="git branch --merged unstable | grep -v '^* unstable$' | xargs git branch -d"
 # alias ss='sshuttle -r sg1 0/0'
 
 # Graphviz
