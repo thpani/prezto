@@ -68,3 +68,7 @@ function gitignore() {
 
 # added by travis gem
 [ -f /Users/thomas/.travis/travis.sh ] && source /Users/thomas/.travis/travis.sh
+
+# sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
