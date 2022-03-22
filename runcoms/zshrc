@@ -33,8 +33,35 @@ bindkey "^R" history-incremental-search-backward
 # Useful aliases.
 alias gitwdiff='git diff --word-diff'
 command -v rg >/dev/null 2>&1 && alias ag='rg'
-alias git-delete-merged="git branch --merged unstable | grep -v '^* unstable$' | xargs git branch -d"
 # alias ss='sshuttle -r sg1 0/0'
+
+function apal-worktree() {
+	if [ -z "$1" ]; then
+		echo "Usage: $0 <branch>"
+    return
+  fi
+
+  git pull
+  git worktree add "../$1" -b "th/$1" unstable
+  cd "../$1"
+  direnv allow
+}
+
+function git-delete-merged() {
+  git checkout unstable
+
+  # rm merged worktrees
+  # list merged worktrees
+  git branch --merged unstable | grep '^+' | cut -d' ' -f2 | while IFS= read -r branch ; do
+    # get worktree path
+    worktree_path=$(git worktree list --porcelain | grep -B2 "^branch refs/heads/${branch}$" | grep worktree | cut -d' ' -f2)
+    # rm the worktree
+    git worktree remove "$worktree_path"
+  done
+
+  # rm non-worktree merged branches
+  git branch --merged unstable | grep -v '^+' | grep -v '^* unstable$' | xargs git branch -d
+}
 
 # Graphviz
 # dot2pdf() {
@@ -55,7 +82,7 @@ alias git-delete-merged="git branch --merged unstable | grep -v '^* unstable$' |
 
 function gitignore() {
 	if [ -z "$1" ]; then
-		echo "Usage: gitignore <language>"
+		echo "Usage: $0 <language>"
 		echo "  Languages: https://github.com/github/gitignore"
 	else
 		curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
