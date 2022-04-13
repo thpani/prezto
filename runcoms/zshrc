@@ -43,12 +43,13 @@ function apal-worktree() {
 
   git pull
   git worktree add "../$1" -b "th/$1" unstable
+  direnv allow "../$1"
   cd "../$1"
-  direnv allow
 }
 
 function git-delete-merged() {
   git checkout unstable
+  git pull
 
   # rm merged worktrees
   # list merged worktrees
