@@ -57,11 +57,17 @@ function git-delete-merged() {
     # get worktree path
     worktree_path=$(git worktree list --porcelain | grep -B2 "^branch refs/heads/${branch}$" | grep worktree | cut -d' ' -f2)
     # rm the worktree
-    git worktree remove "$worktree_path"
+    git worktree remove "$worktree_path" && \
+      git branch -d "$branch" && \
+      echo "Deleted worktree $worktree_path."
   done
 
   # rm non-worktree merged branches
-  git branch --merged unstable | grep -v '^+' | grep -v '^* unstable$' | xargs git branch -d
+  branches=("${(@f)$(git branch --merged unstable | grep -v '^+' | grep -v '^* unstable$')}")
+  for branch in $branches ; do
+    branch=${branch##[[:blank:]]##} # trim whitespace
+    git branch -d "$branch"
+  done
 }
 
 # Graphviz
