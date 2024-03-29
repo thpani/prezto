@@ -10,27 +10,27 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Add ~/bin to $PATH.
-path=(~/bin $path)
+# Add ~/bin and ~/.local/bin to $PATH.
+export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
 
-
+# Setup homebrew
 [[ -s /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Set env.
+# Set env
 export EDITOR='vim'
 export VISUAL=$EDITOR
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-# Source direnv.
+# Source direnv
 eval "$(direnv hook zsh)"
 
-# Source fzf.
+# Source fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Bind Ctrl-R to recursively search history.
+# Bind Ctrl-R to recursively search history
 bindkey "^R" history-incremental-search-backward
 
-# Useful aliases.
+# Useful aliases
 alias gitwdiff='git diff --word-diff'
 command -v rg >/dev/null 2>&1 && alias ag='rg'
 # alias ss='sshuttle -r sg1 0/0'
@@ -95,9 +95,6 @@ function gitignore() {
 		curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/master/$1.gitignore
 	fi
 }
-
-# added by travis gem
-[ -f /Users/thomas/.travis/travis.sh ] && source /Users/thomas/.travis/travis.sh
 
 # sdkman
 export SDKMAN_DIR="$HOME/.sdkman"
